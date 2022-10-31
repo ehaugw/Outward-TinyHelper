@@ -14,7 +14,7 @@ namespace TinyHelper
         {
             return
                 _affectedCharacter == null
-                || (_affectedCharacter.LeftHandEquipment == null && !(_affectedCharacter?.CurrentWeapon?.TwoHanded ?? false)) //this means nothing is held in left hand
+                || ((_affectedCharacter?.LeftHandEquipment?.HasTag(TinyTagManager.GetOrMakeTag("HandsFreeTag")) ?? true) && !(_affectedCharacter?.CurrentWeapon?.TwoHanded ?? false)) //this means nothing is held in left hand
                 || (!_affectedCharacter.Sheathed && AllowDrawnTwoHandedInRight && (_affectedCharacter.CurrentWeapon?.TwoHandedRight ?? true)) //two handers are OK while drawn
                 || (_affectedCharacter.Sheathed && AllowSheathedTwoHandedInLeft && (_affectedCharacter.CurrentWeapon?.TwoHandedRight ?? true)); //two handers are OK while sheathed
 
