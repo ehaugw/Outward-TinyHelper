@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessTools.cs" />
+    <Compile Include="Effects\CooldownChangeEffect.cs" />
     <Compile Include="Effects\ExtendedAddStatusEffect.cs" />
     <Compile Include="Managers\TinyCharacterManager.cs" />
     <Compile Include="Managers\TinyDialogueManager.cs" />
@@ -130,10 +131,8 @@
     <Compile Include="Customs\CustomTag.cs" />
     <Compile Include="Customs\CustomTexture.cs" />
     <Compile Include="Customs\CustomWeapon.cs" />
-    <Compile Include="Effects\ExecutionWeaponDamageTargetHealth.cs" />
+    <Compile Include="Effects\CooldownChangeWeaponDamageTargetHealth.cs" />
     <Compile Include="Effects\ShootBlastFromEffect.cs" />
-    <Compile Include="Effects\SourceConditionalEffects\SourceCondition.cs" />
-    <Compile Include="Effects\SourceConditionalEffects\SourceConditionSkill.cs" />
     <Compile Include="Effects\ToggleEffect.cs" />
     <Compile Include="Effects\AddThenSpreadStatus.cs" />
     <Compile Include="Effects\EmptyOffHandCondition.cs" />
@@ -146,7 +145,7 @@
     <Compile Include="DelayedTask.cs" />
     <Compile Include="Managers\TinyEffectManager.cs" />
     <Compile Include="Effects\CasualStagger.cs" />
-    <Compile Include="Effects\ExecutionWeaponDamage.cs" />
+    <Compile Include="Effects\CooldownChangeWeaponDamage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

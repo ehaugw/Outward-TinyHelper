@@ -1,4 +1,5 @@
 ﻿using Localizer;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -217,14 +218,14 @@ namespace TinyHelper
         /// <param name="character">Character to add the status effect to</param>
         /// <param name="statusEffect">Status Effect reference to add to the character. This does NOT have to be a freshly instantiated clone.</param>
         /// <param name="duration">The custom duration, measured in seconds.</param>
-        public static void AddStatusEffectForDuration(Character character, StatusEffect statusEffect, float duration)
+        public static void AddStatusEffectForDuration(Character character, StatusEffect statusEffect, float duration, Character source = null)
         {
+            Console.WriteLine(String.Format("Incoming source character is {0}", source.Name));
             var oldStatusData = statusEffect.StatusData;
             statusEffect.StatusData = new StatusData(oldStatusData);
             statusEffect.StatusData.LifeSpan = duration;
-
-            character.StatusEffectMngr.AddStatusEffect(statusEffect, character);
-
+           
+            character.StatusEffectMngr.AddStatusEffect(statusEffect, source);
             statusEffect.StatusData = oldStatusData;
         }
 
