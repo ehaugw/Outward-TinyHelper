@@ -220,7 +220,6 @@ namespace TinyHelper
         /// <param name="duration">The custom duration, measured in seconds.</param>
         public static void AddStatusEffectForDuration(Character character, StatusEffect statusEffect, float duration, Character source = null)
         {
-            Console.WriteLine(String.Format("Incoming source character is {0}", source.Name));
             var oldStatusData = statusEffect.StatusData;
             statusEffect.StatusData = new StatusData(oldStatusData);
             statusEffect.StatusData.LifeSpan = duration;
