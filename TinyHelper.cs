@@ -40,7 +40,9 @@ namespace TinyHelper
         static public string PLUGIN_ROOT_PATH
         {
             get
-            {   return Paths.BepInExRootPath + @"\plugins\";
+            {
+                return typeof(TinyHelper).Assembly.Location + @"\..\..\";
+                //return Paths.BepInExRootPath + @"\plugins\";
             }
         }
 
