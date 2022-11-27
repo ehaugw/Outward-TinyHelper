@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="AccessTools.cs" />
     <Compile Include="Effects\CooldownChangeEffect.cs" />
+    <Compile Include="Effects\SpecificImbueCondition.cs" />
     <Compile Include="Effects\ExtendedAddStatusEffect.cs" />
     <Compile Include="Managers\TinyCharacterManager.cs" />
     <Compile Include="Managers\TinyDialogueManager.cs" />
