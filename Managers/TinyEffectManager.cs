@@ -140,6 +140,12 @@ namespace TinyHelper
             return addedEffect;
         }
 
+
+        public static void MakeAbsorbHealth(Transform effectTransform, float absorbRatio) {
+            var addedEffect = effectTransform.gameObject.AddComponent<AddAbsorbHealth>();
+            At.SetValue<float>(absorbRatio, typeof(AddAbsorbHealth), addedEffect, "m_healthRatio");
+        }
+
         //public static ImbueEffectPreset MakeImbuePreset(int imbueID, string name, string description, string iconFileName, int? visualEffectID, float flatDamage, float scalingDamage, DamageType.Types damageType, float knockback, string statusEffect, List<Skill> replaceOnSkills, int chanceToContract = 0, int buildUp = 0)
         public static ImbueEffectPreset MakeImbuePreset(int imbueID, string name, string description,
             string iconFileName = null,
