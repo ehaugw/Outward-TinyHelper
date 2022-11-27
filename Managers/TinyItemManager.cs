@@ -1,4 +1,5 @@
-﻿using Localizer;
+using InstanceIDs;
+using Localizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,37 @@ namespace TinyHelper
 
     public class TinyItemManager
     {
+        public static bool SetLegacyResult(int itemID, int legacyOutcomeID)
+        {
+            var item = ResourcesPrefabManager.Instance.GetItemPrefab(itemID);
+            if (item != null)
+            {
+                item.LegacyItemID = legacyOutcomeID;
+                return true;
+            }
+            return false;
+
+        }
+        public static bool AddEnchantingOption(int itemID, int enchantingRecipeID)
+        {
+            var item = ResourcesPrefabManager.Instance.GetItemPrefab(itemID);
+            var recipe = RecipeManager.Instance.GetEnchantmentRecipeForID(enchantingRecipeID);
+            if (recipe != null && item != null)
+            {
+                var equipments = recipe.CompatibleEquipments.CompatibleEquipments.ToList();
+                equipments.Add(new EnchantmentRecipe.IngredientData() { Type = EnchantmentRecipe.IngredientData.IngredientType.Specific, SpecificIngredient = item });
+
+                recipe.CompatibleEquipments = new EnchantmentRecipe.EquipmentData()
+                {
+                    EquipmentTag = recipe.CompatibleEquipments.EquipmentTag,
+                    CompatibleEquipments = equipments.ToArray(),
+                };
+                return true;
+            }
+            return false;
+            
+        }
+
         public static Item MakeItem(
             int newID,
             int targetID,
