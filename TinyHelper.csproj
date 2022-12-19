@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="AccessTools.cs" />
     <Compile Include="Effects\CooldownChangeEffect.cs" />
+    <Compile Include="Effects\EquipSkillDurabilityCondition.cs" />
     <Compile Include="Effects\UseMana.cs" />
     <Compile Include="Effects\SpecificImbueCondition.cs" />
     <Compile Include="Effects\ExtendedAddStatusEffect.cs" />
