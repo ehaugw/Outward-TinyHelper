@@ -35,5 +35,25 @@ namespace TinyHelper
             At.SetValue(conditions.ToArray(), typeof(Skill), skill, "m_additionalConditions");
             return condition;
         }
+
+        public static Skill.ActivationCondition AddToSkillNotBroken(Skill skill, EquipmentSlot.EquipmentSlotIDs slot)
+        {
+            var activationConditions = TinyGameObjectManager.GetOrMake(skill.transform, "AdditionalActivationConditions", true, true);
+            var gameObj = TinyGameObjectManager.GetOrMake(activationConditions, "EquipDurabilityCondition", true, true).gameObject;
+
+            var condition = new Skill.ActivationCondition();
+            var myCondition = gameObj.AddComponent<EquipDurabilityCondition>();
+            myCondition.EquipmentSlot = slot;
+            myCondition.DurabilityRequired = 0;
+
+            condition.Condition = myCondition;
+
+            At.SetValue("Your left hand equipement is broken.", typeof(Skill.ActivationCondition), condition, "m_defaultMessage");
+
+            List<Skill.ActivationCondition> conditions = ((At.GetValue(typeof(Skill), skill, "m_additionalConditions") as Skill.ActivationCondition[])?.ToList()) ?? new List<Skill.ActivationCondition>();
+            conditions.Add(condition);
+            At.SetValue(conditions.ToArray(), typeof(Skill), skill, "m_additionalConditions");
+            return condition;
+        }
     }
 }
