@@ -59,21 +59,6 @@ namespace TinyHelper
             }
         }
 
-        //[HarmonyPatch(typeof(ItemListDisplay), "MatchFilter")]
-        //public class ItemListDisplay_MatchFilter
-        //{
-        //    [HarmonyPostfix]
-        //    public static bool Postfix(Item __instance, ref bool __result)
-        //    {
-        //        if (__instance.OwnerCharacter != null && __instance.HasTag(TinyTagManager.GetOrMakeTag(InstanceIDs.IDs.InvisitibleItemTag)))
-        //        {
-        //            __result = false;
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-        //}
-
         [HarmonyPatch(typeof(Item), "Description", MethodType.Getter)]
         //[HarmonyAfter(new string[] {"com.sinai.sideloader"})]
         public class Item_Description
@@ -85,15 +70,5 @@ namespace TinyHelper
                 //DescriptionModifier(__instance, __result);
             }
         }
-
-        //[HarmonyPatch(typeof(Item), "GetSyncDataFromSaveData")]
-        //public class Item_GetSyncDataFromSaveData
-        //{
-        //    [HarmonyPostfix]
-        //    public static void Postfix(Item __instance, ref string __result)
-        //    {
-        //        Debug.Log("Loaded item: " + __instance.name " + as xml: " + __result);
-        //    }
-        //}
     }
 }
