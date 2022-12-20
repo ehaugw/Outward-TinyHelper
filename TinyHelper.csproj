@@ -141,7 +141,7 @@
     <Compile Include="Effects\AddThenSpreadStatus.cs" />
     <Compile Include="Effects\EmptyOffHandCondition.cs" />
     <Compile Include="Effects\InputEnablerEffect.cs" />
-    <Compile Include="TinyHelperHelpers.cs" />
+    <Compile Include="TinyHelpers.cs" />
     <Compile Include="TinyUnofficialPatches.cs" />
     <Compile Include="WeaponSpeeds.cs" />
     <Compile Include="Managers\TinyTagManager.cs" />
