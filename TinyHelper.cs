@@ -4,9 +4,7 @@ namespace TinyHelper
 {
     using UnityEngine;
     using BepInEx;
-    using System.IO;
     using System;
-    using SideLoader;
 
     [BepInPlugin(GUID, NAME, VERSION)]
     public class TinyHelper : BaseUnityPlugin
