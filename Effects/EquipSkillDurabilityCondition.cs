@@ -28,7 +28,7 @@ namespace TinyHelper
 
             condition.Condition = myCondition;
 
-            At.SetValue("Your left hand equipement is too damaged to be used this way.", typeof(Skill.ActivationCondition), condition, "m_defaultMessage");
+            At.SetValue("A required piece of equipment is missing or too damaged to be used this way.", typeof(Skill.ActivationCondition), condition, "m_defaultMessage");
 
             List<Skill.ActivationCondition> conditions = ((At.GetValue(typeof(Skill), skill, "m_additionalConditions") as Skill.ActivationCondition[])?.ToList()) ?? new List<Skill.ActivationCondition>();
             conditions.Add(condition);
@@ -45,10 +45,9 @@ namespace TinyHelper
             var myCondition = gameObj.AddComponent<EquipDurabilityCondition>();
             myCondition.EquipmentSlot = slot;
             myCondition.DurabilityRequired = 0;
-
             condition.Condition = myCondition;
 
-            At.SetValue("Your left hand equipement is broken.", typeof(Skill.ActivationCondition), condition, "m_defaultMessage");
+            At.SetValue("A required piece of equipment is missing or broken.", typeof(Skill.ActivationCondition), condition, "m_defaultMessage");
 
             List<Skill.ActivationCondition> conditions = ((At.GetValue(typeof(Skill), skill, "m_additionalConditions") as Skill.ActivationCondition[])?.ToList()) ?? new List<Skill.ActivationCondition>();
             conditions.Add(condition);
