@@ -20,8 +20,12 @@ namespace TinyHelper
         public delegate void DescriptionModifier(Item item, ref string description);
         public static DescriptionModifier OnDescriptionModified = delegate(Item item, ref string description) {};
 
+        public static TinyHelper Instance;
+
         internal void Awake()
         {
+            Instance = this;
+
             var harmony = new Harmony(GUID);
             harmony.PatchAll();
         }
