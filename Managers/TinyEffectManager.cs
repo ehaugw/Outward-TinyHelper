@@ -28,7 +28,8 @@ namespace TinyHelper
             UID? uid = null,
             string modGUID = null,
             string iconFileName = null,
-            string displayName = null
+            string displayName = null,
+            string rootPath = null
         )
         {
             Dictionary<string, StatusEffect> statusEffectDictionary = At.GetValue(typeof(ResourcesPrefabManager), null, "STATUSEFFECT_PREFABS") as Dictionary<string, StatusEffect>;
@@ -52,7 +53,7 @@ namespace TinyHelper
             At.SetValue(StatusEffect.FamilyModes.Bind, typeof(StatusEffect), newStatusEffect, "m_familyMode");
             newStatusEffect.RequiredStatus = null;
             newStatusEffect.RemoveRequiredStatus = false;
-            if (iconFileName != null) newStatusEffect.OverrideIcon = CustomTexture.MakeSprite(CustomTexture.LoadTexture(iconFileName, 0, false, FilterMode.Point), CustomTexture.SpriteBorderTypes.None);
+            if (iconFileName != null) newStatusEffect.OverrideIcon = CustomTexture.MakeSprite(CustomTexture.LoadTexture(iconFileName, 0, false, FilterMode.Point, rootPath: rootPath), CustomTexture.SpriteBorderTypes.None);
 
             //Make a proper tag source selector, which applies tags to the effect.
             var tagSourceSelector = (tagID != null ? new TagSourceSelector(TagSourceManager.Instance.GetTag(tagID)) : new TagSourceSelector());

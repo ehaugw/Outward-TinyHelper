@@ -27,9 +27,9 @@ namespace TinyHelper
         /// </summary>
         /// <param name="filePath">The path is appended to plugin path, and must include file endings.</param>
         /// <returns></returns>
-        public static Texture2D LoadTexture(string filePath, int mipCount, bool linear, FilterMode filterMode, float? mipMapBias = null)
+        public static Texture2D LoadTexture(string filePath, int mipCount, bool linear, FilterMode filterMode, float? mipMapBias = null, string rootPath = null)
         {
-            filePath = TinyHelper.PLUGIN_ROOT_PATH + filePath;
+            filePath = (rootPath??TinyHelper.PLUGIN_ROOT_PATH) + filePath;
 
             //Only open image once
             if (!LoadedTextures.ContainsKey(filePath)) LoadedTextures[filePath] = File.ReadAllBytes(filePath);
