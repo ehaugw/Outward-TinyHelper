@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessTools.cs" />
+    <Compile Include="EffectConditions\QuestKnowledgeCondition.cs" />
     <Compile Include="EffectConditions\StatusEffectsCondition.cs" />
     <Compile Include="Effects\AddNewStatusEffectRandom.cs" />
     <Compile Include="Effects\CooldownChangeEffect.cs" />
