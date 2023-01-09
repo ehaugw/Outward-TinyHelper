@@ -67,7 +67,6 @@ namespace TinyHelper
             actionNode.action = reward;
             reward.RewardReceiver = receiver;
 
-
             var itemQuantity = new NodeCanvas.Tasks.Actions.ItemQuantity();
             var itemRef = new ItemReference();
             itemRef.ItemID = itemID;
