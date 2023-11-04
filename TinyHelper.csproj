@@ -132,6 +132,8 @@
     <Compile Include="Managers\TinyDialogueManager.cs" />
     <Compile Include="Managers\TinyGameObjectManager.cs" />
     <Compile Include="Managers\TinyItemManager.cs" />
+    <Compile Include="QuestRequirements.cs" />
+    <Compile Include="LogicType.cs" />
     <Compile Include="SkillRequirements.cs" />
     <Compile Include="Customs\CustomAsset.cs" />
     <Compile Include="Customs\CustomItem.cs" />
