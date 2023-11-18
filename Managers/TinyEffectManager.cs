@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using TinyHelper.Effects;
+using TinyHelper.Interfaces;
 using UnityEngine;
 
 namespace TinyHelper
@@ -138,6 +140,14 @@ namespace TinyHelper
             addedEffect.Knockback = knockback;
             //addedEffect.SyncType = Effect.SyncTypes.OwnerSync;
 
+            return addedEffect;
+        }
+
+        public static WeaponDamage MakeDynamicWeaponDamage(Transform effectTransform, IDamageScaler damageScaler)
+        {
+            DynamicWeaponDamage addedEffect = effectTransform.gameObject.AddComponent<DynamicWeaponDamage>();
+            addedEffect.OverrideEffectCategory = EffectSynchronizer.EffectCategories.Hit;
+            addedEffect.DamageScaler = damageScaler;
             return addedEffect;
         }
 

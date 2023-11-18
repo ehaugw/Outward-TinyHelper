@@ -132,7 +132,10 @@
     <Compile Include="Managers\TinyDialogueManager.cs" />
     <Compile Include="Managers\TinyGameObjectManager.cs" />
     <Compile Include="Managers\TinyItemManager.cs" />
+    <Compile Include="TinyHelperRPCManager.cs" />
     <Compile Include="QuestRequirements.cs" />
+    <Compile Include="Effects\DynamicWeaponDamage.cs" />
+    <Compile Include="Interfaces\IDamageScaler.cs" />
     <Compile Include="LogicType.cs" />
     <Compile Include="SkillRequirements.cs" />
     <Compile Include="Customs\CustomAsset.cs" />

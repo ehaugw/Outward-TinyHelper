@@ -26,6 +26,10 @@ namespace TinyHelper
         {
             Instance = this;
 
+            var rpcGameObject = new GameObject("CrusaderRPC");
+            DontDestroyOnLoad(rpcGameObject);
+            rpcGameObject.AddComponent<TinyHelperRPCManager>();
+
             var harmony = new Harmony(GUID);
             harmony.PatchAll();
         }

@@ -33,6 +33,7 @@ namespace TinyHelper
 				GameObject gameObject = PhotonNetwork.InstantiateSceneObject("_characters/NewPlayerPrefab", position, Quaternion.Euler(rotation), 0, data);
 				gameObject.SetActive(false);
 				Character component = gameObject.GetComponent<Character>();
+				// this is where you can set it to not be AI
 				component.SetUID(uid);
 
 				return component;
