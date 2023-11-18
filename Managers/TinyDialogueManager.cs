@@ -58,6 +58,15 @@ namespace TinyHelper
             (openTrainer.action as TrainDialogueAction).Trainer = new BBParameter<Trainer>(trainer);
             return openTrainer;
         }
+        public static ActionNode MakeStartQuest(Graph graph, int questID)
+        {
+            //GIVE PROGRES START
+            ActionNode actionNode = graph.AddNode<ActionNode>();
+            var reward = new GiveQuest();
+            actionNode.action = reward;
+            reward.quest = new BBParameter<Quest>(ResourcesPrefabManager.Instance.GetItemPrefab(questID) as Quest);
+            return actionNode;
+        }
 
         public static ActionNode MakeGiveItemReward(Graph graph, int itemID, GiveReward.Receiver receiver, int quantity = 1)
         {
@@ -73,7 +82,6 @@ namespace TinyHelper
             itemQuantity.Item = new BBParameter<ItemReference>(itemRef);
             itemQuantity.Quantity = quantity;
             reward.ItemReward = new List<NodeCanvas.Tasks.Actions.ItemQuantity>() { itemQuantity };
-
             return actionNode;
         }
 
