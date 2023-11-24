@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TinyHelper
+﻿namespace TinyHelper
 {
-	using SideLoader;
-    using UnityEngine;
+	using UnityEngine;
 
-    public class TinyCharacterManager
+	public class TinyCharacterManager
     {
 		public static Character SpawnCharacter(string uid, Vector3 position, Vector3 rotation)
 		{
@@ -35,8 +28,34 @@ namespace TinyHelper
 				Character component = gameObject.GetComponent<Character>();
 				// this is where you can set it to not be AI
 				component.SetUID(uid);
+				At.SetValue<Character>(component, typeof(int), 1, "m_isAI");
 
-				return component;
+    //            // fix Photon View component
+    //            if (character.gameObject.GetComponent<PhotonView>() is PhotonView view)
+    //            {
+    //                int id = view.viewID;
+    //                GameObject.DestroyImmediate(view);
+
+    //                if (!PhotonNetwork.isNonMasterClientInRoom && id > 0)
+    //                    PhotonNetwork.UnAllocateViewID(view.viewID);
+    //            }
+
+    //            // setup new view
+    //            PhotonView pView = character.gameObject.AddComponent<PhotonView>();
+    //            pView.ownerId = 0;
+    //            pView.ownershipTransfer = OwnershipOption.Fixed;
+    //            pView.onSerializeTransformOption = OnSerializeTransform.PositionAndRotation;
+    //            pView.onSerializeRigidBodyOption = OnSerializeRigidBody.All;
+    //            pView.synchronization = ViewSynchronization.Off;
+
+    //            // fix photonview serialization components
+    //            if (pView.ObservedComponents == null || pView.ObservedComponents.Count < 1)
+    //                pView.ObservedComponents = new List<Component>() { character };
+
+				//// set view ID last.
+				//pView.viewID = PhotonNetwork.AllocateSceneViewID();
+
+                return component;
 			}
 		}
 	}
