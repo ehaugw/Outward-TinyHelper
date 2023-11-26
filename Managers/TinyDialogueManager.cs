@@ -1,6 +1,7 @@
 ﻿using NodeCanvas.DialogueTrees;
 using NodeCanvas.Framework;
 using NodeCanvas.Tasks.Actions;
+using NodeCanvas.Tasks.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace TinyHelper
             (openTrainer.action as TrainDialogueAction).Trainer = new BBParameter<Trainer>(trainer);
             return openTrainer;
         }
+
         public static ActionNode MakeStartQuest(Graph graph, int questID)
         {
             //GIVE PROGRES START
@@ -66,6 +68,28 @@ namespace TinyHelper
             actionNode.action = reward;
             reward.quest = new BBParameter<Quest>(ResourcesPrefabManager.Instance.GetItemPrefab(questID) as Quest);
             return actionNode;
+        }
+
+        public static ActionNode MakeQuestEvent(Graph graph, string EventUID)
+        {
+            ActionNode actionNode = graph.AddNode<ActionNode>();
+            var reward = new SendQuestEvent();
+            actionNode.action = reward;
+            reward.QuestEventRef = new QuestEventReference()
+            {
+                EventUID = EventUID
+            };
+            return actionNode;
+        }
+
+        public static ConditionNode MakeEventOccuredCondition(Graph graph, string EventUID)
+        {
+            ConditionNode conditionNode = graph.AddNode<ConditionNode>();
+            conditionNode.condition = new Condition_QuestEventOccured()
+            {
+
+            };
+            return conditionNode;
         }
 
         public static ActionNode MakeGiveItemReward(Graph graph, int itemID, GiveReward.Receiver receiver, int quantity = 1)
