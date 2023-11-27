@@ -8,6 +8,11 @@ namespace TinyHelper
 {
     public class QuestRequirements
     {
+        public static bool HasQuestEvent(string questEventUID)
+        {
+            return QuestEventManager.Instance.GetEventCurrentStack(questEventUID) > 0;
+        }
+
         public static bool HasQuestKnowledge(Character character, int[] questIDs, LogicType logicType, bool inverted=false, bool requireCompleted=false)
         {
             bool result = false;
