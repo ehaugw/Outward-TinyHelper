@@ -77,17 +77,18 @@ namespace TinyHelper
             actionNode.action = reward;
             reward.QuestEventRef = new QuestEventReference()
             {
-                EventUID = EventUID
+                EventUID = EventUID,
             };
             return actionNode;
         }
 
-        public static ConditionNode MakeEventOccuredCondition(Graph graph, string EventUID)
+        public static ConditionNode MakeEventOccuredCondition(Graph graph, string EventUID, int MinStack)
         {
             ConditionNode conditionNode = graph.AddNode<ConditionNode>();
             conditionNode.condition = new Condition_QuestEventOccured()
             {
-
+                QuestEventRef = new QuestEventReference() { EventUID = EventUID },
+                MinStack = MinStack,
             };
             return conditionNode;
         }
