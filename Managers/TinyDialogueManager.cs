@@ -55,8 +55,14 @@ namespace TinyHelper
         public static ActionNode MakeTrainDialogueAction(Graph graph, Trainer trainer)
         {
             // the template already has an action node for opening the Train menu. 
-            var openTrainer = graph.allNodes[1] as ActionNode;
-            (openTrainer.action as TrainDialogueAction).Trainer = new BBParameter<Trainer>(trainer);
+            //var openTrainer = graph.allNodes[1] as ActionNode;
+            var openTrainer = graph.AddNode<ActionNode>();
+            var action = new TrainDialogueAction()
+            {
+                Trainer = new BBParameter<Trainer>(trainer),
+                PlayerCharacter = new BBParameter<Character>() { name = "gInstigator" }
+            };
+            openTrainer.action = action;
             return openTrainer;
         }
 
@@ -89,6 +95,21 @@ namespace TinyHelper
             {
                 QuestEventRef = new QuestEventReference() { EventUID = EventUID },
                 MinStack = MinStack,
+            };
+            return conditionNode;
+        }
+
+        public static ConditionNode MakeHasItemCondition(Graph graph, int itemID, int MinStack)
+        {
+            ConditionNode conditionNode = graph.AddNode<ConditionNode>();
+
+            conditionNode.condition = new Condition_OwnsItem()
+            {
+                character = new BBParameter<Character>() { name = "gInstigator" },
+                item = new BBParameter<ItemReference> (new ItemReference() { ItemID = itemID }),
+                minAmount = new BBParameter<int>(MinStack),
+                itemMustBeEquiped = new BBParameter<bool>(false),
+                SaveMatchingContainerVariable = null
             };
             return conditionNode;
         }
