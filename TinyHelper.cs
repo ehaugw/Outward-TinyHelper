@@ -26,7 +26,7 @@ namespace TinyHelper
         {
             Instance = this;
 
-            var rpcGameObject = new GameObject("CrusaderRPC");
+            var rpcGameObject = new GameObject("TinyHelperRPC");
             DontDestroyOnLoad(rpcGameObject);
             rpcGameObject.AddComponent<TinyHelperRPCManager>();
 

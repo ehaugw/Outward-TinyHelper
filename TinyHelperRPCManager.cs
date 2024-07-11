@@ -27,5 +27,12 @@ namespace TinyHelper
             Weapon weapon = ItemManager.Instance.GetItem(weaponGUID) as Weapon;
             weapon.AddImbueEffect(ResourcesPrefabManager.Instance.GetEffectPreset(infusionID) as ImbueEffectPreset, duration);
         }
+
+        [PunRPC]
+        public void CharacterForceCancelRPC(string characterGUID, bool bool1, bool bool2)
+        {
+            Character character = CharacterManager.Instance.GetCharacter(characterGUID);
+            character.ForceCancel(bool1, bool2);
+        }
     }
 }
