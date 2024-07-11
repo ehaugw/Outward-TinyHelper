@@ -1,5 +1,6 @@
-﻿using NodeCanvas.DialogueTrees;
+using NodeCanvas.DialogueTrees;
 using NodeCanvas.Framework;
+using NodeCanvas.StateMachines;
 using NodeCanvas.Tasks.Actions;
 using NodeCanvas.Tasks.Conditions;
 using System;
@@ -10,6 +11,32 @@ using UnityEngine;
 
 namespace TinyHelper
 {
+    //public static class InventoryExtension
+    //{
+    //    public static Item GetItemWithEnchantmentFromInventory(this CharacterInventory inventory, int itemID, int enchantmentID)
+    //    {
+    //        return null;
+    //    }
+    //}
+    //public class Condition_SimpleOwnsItemEnchanted : Condition_SimpleOwnsItem
+    //{
+    //    public int enchant;
+    //    protected override bool OnCheck()
+    //    {
+    //        if (character.value == null || item.value == null)
+    //        {
+    //            return false;
+    //        }
+
+    //        if (character.value.Cheats.OwnsQuestItems)
+    //        {
+    //            return true;
+    //        }
+
+    //        return character.value.Inventory.OwnsItem(item.value.ItemID, minAmount.value);
+    //    }
+    //}
+
     public class TinyDialogueManager
     {
         public static GameObject AssignTrainerTemplate(Transform parentTransform)
@@ -102,14 +129,27 @@ namespace TinyHelper
         public static ConditionNode MakeHasItemCondition(Graph graph, int itemID, int MinStack)
         {
             ConditionNode conditionNode = graph.AddNode<ConditionNode>();
-
             conditionNode.condition = new Condition_OwnsItem()
             {
                 character = new BBParameter<Character>() { name = "gInstigator" },
                 item = new BBParameter<ItemReference> (new ItemReference() { ItemID = itemID }),
                 minAmount = new BBParameter<int>(MinStack),
                 itemMustBeEquiped = new BBParameter<bool>(false),
-                SaveMatchingContainerVariable = null
+                SaveMatchingContainerVariable = null,
+            };
+            return conditionNode;
+        }
+
+        public static ConditionNode MakeHasItemConditionSimple(Graph graph, int itemID, int MinStack, int enchantment = 0)
+        {
+            ConditionNode conditionNode = graph.AddNode<ConditionNode>();
+            //conditionNode.condition = new Condition_SimpleOwnsItemEnchanted()
+            conditionNode.condition = new Condition_SimpleOwnsItem()
+            {
+                character = new BBParameter<Character>() { name = "gInstigator" },
+                item = new BBParameter<Item>(ResourcesPrefabManager.Instance.GetItemPrefab(itemID)),
+                minAmount = new BBParameter<int>(MinStack),
+                //enchant = enchantment
             };
             return conditionNode;
         }
@@ -131,6 +171,21 @@ namespace TinyHelper
             return actionNode;
         }
 
+        public static ActionNode MakeResignItem(Graph graph, int itemID, GiveReward.Receiver provider, int quantity = 1, int enchantment = 0)
+        {
+            var actionNode = graph.AddNode<ActionNode>();
+            actionNode.action = new RemoveItem()
+            {
+                fromCharacter = new BBParameter<Character>() { name = "gInstigator" },
+                Items = new List<BBParameter<ItemReference>>
+                {
+                    new BBParameter<ItemReference>(new ItemReference() { ItemID = itemID }),
+                },
+                Amount = new List<BBParameter<int>> { new BBParameter<int>(quantity) },
+            };
+            return actionNode;
+        }
+
         public static StatementNodeExt MakeStatementNode(Graph graph, string name, string statementText)
         {
             var statementNode = graph.AddNode<StatementNodeExt>();
@@ -138,7 +193,7 @@ namespace TinyHelper
             statementNode.SetActorName(name);
             return statementNode;
         }
-
+        
         public static MultipleChoiceNodeExt MakeMultipleChoiceNode(Graph graph, string[] statementTexts)
         {
             var multipleChoiceNode = graph.AddNode<MultipleChoiceNodeExt>();
@@ -147,6 +202,24 @@ namespace TinyHelper
                 multipleChoiceNode.availableChoices.Add(new MultipleChoiceNodeExt.Choice { statement = new Statement { text = statementText } });
             }
             return multipleChoiceNode;
+        }
+
+        public static void ChainNodes(Graph graph, Node[] nodes)
+        {
+            Node prev = null;
+            foreach (var node in nodes)
+            {
+                if (prev != null) graph.ConnectNodes(prev, node);
+                prev = node;
+            }
+        }
+
+        public static void ConnectMultipleChoices(Graph graph, Node baseNode, Node[] nodes)
+        {
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                graph.ConnectNodes(baseNode, nodes[i], i);
+            }
         }
     }
 }
