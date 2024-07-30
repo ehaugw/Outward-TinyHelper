@@ -229,20 +229,29 @@ namespace TinyHelper
             return null;
         }
 
+        public static void AddStatusEffectForDuration(Character character, string _statusIdentifier, float duration, Character source = null, float chance = 1f)
+        {
+            StatusEffect statusEffectPrefab = ResourcesPrefabManager.Instance.GetStatusEffectPrefab(_statusIdentifier);
+            AddStatusEffectForDuration(character, statusEffectPrefab, duration, source:source, chance:chance);
+        }
         /// <summary>
         /// Add a status effect to a character for an arbitrary duration rather than the predefined status effect lifespan.
         /// </summary>
         /// <param name="character">Character to add the status effect to</param>
         /// <param name="statusEffect">Status Effect reference to add to the character. This does NOT have to be a freshly instantiated clone.</param>
         /// <param name="duration">The custom duration, measured in seconds.</param>
-        public static void AddStatusEffectForDuration(Character character, StatusEffect statusEffect, float duration, Character source = null)
+        public static void AddStatusEffectForDuration(Character character, StatusEffect statusEffect, float duration, Character source = null, float chance = 1f)
         {
-            var oldStatusData = statusEffect.StatusData;
-            statusEffect.StatusData = new StatusData(oldStatusData);
-            statusEffect.StatusData.LifeSpan = duration;
-           
-            character.StatusEffectMngr.AddStatusEffect(statusEffect, source);
-            statusEffect.StatusData = oldStatusData;
+            //var willContract = UnityEngine.Random.Range(0, 100) < chance * 100;
+            if (character.StatusEffectMngr is StatusEffectManager manager)
+            {
+                var oldStatusData = statusEffect.StatusData;
+                statusEffect.StatusData = new StatusData(oldStatusData);
+                statusEffect.StatusData.LifeSpan = duration;
+
+                manager.AddStatusEffect(statusEffect, source);
+                statusEffect.StatusData = oldStatusData;
+            }
         }
 
         public static void ChangeEffectPresetDamageTypeData(EffectPreset effect, DamageType.Types originalType, DamageType.Types newType)
