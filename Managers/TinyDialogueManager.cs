@@ -41,7 +41,7 @@ namespace TinyHelper
     {
         public static GameObject AssignTrainerTemplate(Transform parentTransform)
         {
-            var trainerTemplate = UnityEngine.Object.Instantiate(Resources.Load("editor/templates/TrainerTemplate")) as GameObject;
+            var trainerTemplate = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("editor/templates/TrainerTemplate"));
             trainerTemplate.transform.parent = parentTransform;
             trainerTemplate.transform.position = parentTransform.position;
             trainerTemplate.transform.rotation = parentTransform.rotation;
