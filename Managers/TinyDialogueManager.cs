@@ -39,6 +39,16 @@ namespace TinyHelper
 
     public class TinyDialogueManager
     {
+        public static GameObject AssignMerchantTemplate(Transform parentTransform)
+        {
+            var trainerTemplate = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("editor/templates/MerchantTemplate"));
+            trainerTemplate.transform.parent = parentTransform;
+            trainerTemplate.transform.position = parentTransform.position;
+            trainerTemplate.transform.rotation = parentTransform.rotation;
+
+            return trainerTemplate;
+        }
+
         public static GameObject AssignTrainerTemplate(Transform parentTransform)
         {
             var trainerTemplate = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("editor/templates/TrainerTemplate"));
@@ -54,6 +64,13 @@ namespace TinyHelper
             var actor = dialogueGameObject.GetComponentInChildren<DialogueActor>();
             actor.SetName(name);
             return actor;
+        }
+
+        public static Merchant SetMerchant(GameObject merchantTemplate, UID merchantUID)
+        {
+            // get "Trainer" component, and set the SkillTreeUID to our custom tree UID
+            Merchant merchant = merchantTemplate.GetComponentInChildren<Merchant>();
+            return merchant;
         }
 
         public static Trainer SetTrainerSkillTree(GameObject trainerTemplate, UID skillTreeUID)
@@ -77,6 +94,20 @@ namespace TinyHelper
             var actors = At.GetValue(typeof(DialogueTree), graph as DialogueTree, "_actorParameters") as List<DialogueTree.ActorParameter>;
             actors[0].actor = actor;
             actors[0].name = actor.name;
+        }
+        
+        public static ActionNode MakeMerchantDialogueAction(Graph graph, Merchant merchant)
+        {
+            // the template already has an action node for opening the Train menu. 
+            //var openTrainer = graph.allNodes[1] as ActionNode;
+            var openTrainer = graph.AddNode<ActionNode>();
+            var action = new ShopDialogueAction()
+            {
+                Merchant = new BBParameter<Merchant>(merchant),
+                PlayerCharacter = new BBParameter<Character>() { name = "gInstigator" },
+            };
+            openTrainer.action = action;
+            return openTrainer;
         }
 
         public static ActionNode MakeTrainDialogueAction(Graph graph, Trainer trainer)
