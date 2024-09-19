@@ -129,6 +129,7 @@
     <Compile Include="Effects\SpecificImbueCondition.cs" />
     <Compile Include="Effects\ExtendedAddStatusEffect.cs" />
     <Compile Include="Extensions\AnimatorExtension.cs" />
+    <Compile Include="Extensions\CharacterQuestKnowledgeExtensions.cs" />
     <Compile Include="Managers\TinyCharacterManager.cs" />
     <Compile Include="Managers\TinyDialogueManager.cs" />
     <Compile Include="Managers\TinyGameObjectManager.cs" />
