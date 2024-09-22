@@ -122,6 +122,7 @@
     <Compile Include="EffectConditions\QuestKnowledgeCondition.cs" />
     <Compile Include="EffectConditions\StatusEffectsCondition.cs" />
     <Compile Include="Effects\AddNewStatusEffectRandom.cs" />
+    <Compile Include="Effects\EnableHitDetection.cs" />
     <Compile Include="Effects\RemoveItemFromInventory.cs" />
     <Compile Include="Effects\CooldownChangeEffect.cs" />
     <Compile Include="Effects\EquipSkillDurabilityCondition.cs" />
