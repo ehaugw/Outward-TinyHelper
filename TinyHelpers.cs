@@ -1,7 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public static class TinyHelpers
 {
+    public static string OrConcat<T>(this ICollection<T> collection)
+    {
+        var list = collection.ToList();
+        var result = "";
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            result += list[i].ToString();
+
+            if (i == list.Count - 2)
+            {
+                result += " or ";
+            }
+            else if (i < list.Count - 2)
+            {
+                result += ", ";
+            }
+        }
+
+        return result;
+    }
 
     public static void Shuffle<T>(this IList<T> list)
     {
