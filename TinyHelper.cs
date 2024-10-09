@@ -10,7 +10,7 @@ namespace TinyHelper
     public class TinyHelper : BaseUnityPlugin
     {
         public const string GUID = "com.ehaugw.tinyhelper";
-        public const string VERSION = "4.8.3";
+        public const string VERSION = "4.8.4";
         public const string NAME = "Tiny Helper";
 
         public static event Action OnPrefabLoaded = delegate () { };
